@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux'
 import { RootState } from '@/store'
 import Header from '@/components/Header'
+import Button from '@/components/Button'
 import styles from './Anuncie.module.scss'
 
 const Anuncie = () => {
@@ -41,7 +42,7 @@ const Anuncie = () => {
                     ))}
                 </select>
                 <input type="number" placeholder="Preço do produto" />
-                <button type="submit">Cadastrar Produto</button>
+                <Button type="submit">Cadastrar Produto</Button>
             </form>
         </div>
     )
