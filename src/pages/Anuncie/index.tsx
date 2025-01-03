@@ -1,11 +1,14 @@
 import { useForm } from 'react-hook-form'
-import { useSelector } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
+import { cadastrarItem } from '@/store/reducers/itens'
 import { RootState } from '@/store'
 import Header from '@/components/Header'
 import Button from '@/components/Button'
 import styles from './Anuncie.module.scss'
 
 const Anuncie = () => {
+    const dispatch = useDispatch()
+
     const categorias = useSelector((state: RootState) =>
         state.categorias.map(({ nome, id }) => ({ nome, id }))
     )
@@ -20,8 +23,8 @@ const Anuncie = () => {
         },
     })
 
-    const cadastrar = (parametro) => {
-        console.log(parametro)
+    const cadastrar = (data) => {
+        dispatch(cadastrarItem(data))
     }
 
     return (
