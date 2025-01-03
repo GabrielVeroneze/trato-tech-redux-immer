@@ -2,6 +2,7 @@ import { useForm } from 'react-hook-form'
 import { useDispatch, useSelector } from 'react-redux'
 import { cadastrarItem } from '@/store/reducers/itens'
 import { RootState } from '@/store'
+import { DadosCadastroProduto } from '@/types/DadosCadastroProduto'
 import Header from '@/components/Header'
 import Button from '@/components/Button'
 import styles from './Anuncie.module.scss'
@@ -13,17 +14,17 @@ const Anuncie = () => {
         state.categorias.map(({ nome, id }) => ({ nome, id }))
     )
 
-    const { register, handleSubmit } = useForm({
+    const { register, handleSubmit } = useForm<DadosCadastroProduto>({
         defaultValues: {
             nome: '',
             descricao: '',
             imagem: '',
             categoria: '',
-            preco: '',
+            preco: 0,
         },
     })
 
-    const cadastrar = (data) => {
+    const cadastrar = (data: DadosCadastroProduto) => {
         dispatch(cadastrarItem(data))
     }
 
