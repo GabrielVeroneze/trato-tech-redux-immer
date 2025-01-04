@@ -3,20 +3,20 @@ import TituloComImagem from './TituloComImagem'
 import styles from './Header.module.scss'
 
 interface HeaderProps {
+    children?: React.ReactNode
     titulo: string
     descricao: string
     imagem?: string
     className?: string
 }
 
-const Header = ({ titulo, descricao, imagem, className = '' }: HeaderProps) => {
+const Header = ({ children, titulo, descricao, imagem, className = '' }: HeaderProps) => {
     return (
         <header className={styles.header}>
             {titulo && !imagem && (
-                <TituloSemImagem
-                    titulo={titulo}
-                    descricao={descricao}
-                />
+                <TituloSemImagem titulo={titulo} descricao={descricao}>
+                    {children}
+                </TituloSemImagem>
             )}
             {titulo && imagem && (
                 <TituloComImagem
@@ -24,7 +24,9 @@ const Header = ({ titulo, descricao, imagem, className = '' }: HeaderProps) => {
                     descricao={descricao}
                     imagem={imagem}
                     className={className}
-                />
+                >
+                    {children}
+                </TituloComImagem>
             )}
         </header>
     )
