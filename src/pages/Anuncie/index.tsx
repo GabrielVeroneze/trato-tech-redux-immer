@@ -16,9 +16,9 @@ const Anuncie = () => {
 
     const { register, handleSubmit } = useForm<DadosCadastroProduto>({
         defaultValues: {
-            nome: '',
+            titulo: '',
             descricao: '',
-            imagem: '',
+            foto: '',
             categoria: '',
             preco: 0,
         },
@@ -42,7 +42,7 @@ const Anuncie = () => {
                     type="text"
                     placeholder="Nome do produto"
                     alt="nome do produto"
-                    {...register('nome', { required: true })}
+                    {...register('titulo', { required: true })}
                 />
                 <input
                     type="text"
@@ -54,7 +54,7 @@ const Anuncie = () => {
                     type="text"
                     placeholder="URL da imagem do produto"
                     alt="URL da imagem do produto"
-                    {...register('imagem', { required: true })}
+                    {...register('foto', { required: true })}
                 />
                 <select {...register('categoria', { required: true })}>
                     <option value="" disabled>
@@ -69,7 +69,10 @@ const Anuncie = () => {
                 <input
                     type="number"
                     placeholder="Preço do produto"
-                    {...register('preco', { required: true })}
+                    {...register('preco', {
+                        required: true,
+                        valueAsNumber: true,
+                    })}
                 />
                 <Button type="submit">Cadastrar Produto</Button>
             </form>
