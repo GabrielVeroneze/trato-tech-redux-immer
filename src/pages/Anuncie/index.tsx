@@ -1,4 +1,5 @@
 import { useForm } from 'react-hook-form'
+import { useParams } from 'react-router-dom'
 import { useDispatch, useSelector } from 'react-redux'
 import { cadastrarItem } from '@/store/reducers/itens'
 import { RootState } from '@/store'
@@ -8,6 +9,8 @@ import Button from '@/components/Button'
 import styles from './Anuncie.module.scss'
 
 const Anuncie = () => {
+    const { nomeCategoria = '' } = useParams()
+
     const dispatch = useDispatch()
 
     const categorias = useSelector((state: RootState) =>
@@ -19,7 +22,7 @@ const Anuncie = () => {
             titulo: '',
             descricao: '',
             foto: '',
-            categoria: '',
+            categoria: nomeCategoria,
             preco: 0,
         },
     })
@@ -56,7 +59,10 @@ const Anuncie = () => {
                     alt="URL da imagem do produto"
                     {...register('foto', { required: true })}
                 />
-                <select {...register('categoria', { required: true })}>
+                <select
+                    {...register('categoria', { required: true })}
+                    disabled={!!nomeCategoria}
+                >
                     <option value="" disabled>
                         Selecione a categoria
                     </option>
