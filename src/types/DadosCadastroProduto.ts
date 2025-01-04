@@ -1,7 +1,7 @@
 export interface DadosCadastroProduto {
-    nome: string
+    titulo: string
     descricao: string
-    imagem: string
+    foto: string
     categoria: string
     preco: number
 }
