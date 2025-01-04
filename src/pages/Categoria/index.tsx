@@ -1,12 +1,14 @@
 import { useSelector } from 'react-redux'
-import { useParams } from 'react-router-dom'
+import { useNavigate, useParams } from 'react-router-dom'
 import { RootState } from '@/store'
 import Header from '@/components/Header'
+import Button from '@/components/Button'
 import Item from '@/components/Item'
 import styles from './Categoria.module.scss'
 
 const Categoria = () => {
     const { nomeCategoria } = useParams()
+    const navigate = useNavigate()
 
     const { categoria, itens } = useSelector((state: RootState) => {
         const regex = new RegExp(state.busca, 'i')
@@ -23,7 +25,11 @@ const Categoria = () => {
                 titulo={categoria!.nome}
                 descricao={categoria!.descricao}
                 imagem={categoria!.header}
-            />
+            >
+                <Button onClick={() => navigate(`/anuncie/${nomeCategoria}`)}>
+                    Quero anunciar
+                </Button>
+            </Header>
             <div className={styles.itens}>
                 {itens.map(item => (
                     <Item key={item.id} {...item} />
