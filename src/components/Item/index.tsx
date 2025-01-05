@@ -1,5 +1,6 @@
+import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
-import { AiFillHeart, AiFillMinusCircle, AiFillPlusCircle, AiOutlineHeart } from 'react-icons/ai'
+import { AiFillEdit, AiFillHeart, AiFillMinusCircle, AiFillPlusCircle, AiOutlineCheck, AiOutlineHeart } from 'react-icons/ai'
 import { FaCartPlus } from 'react-icons/fa'
 import { mudarFavorito } from '@/store/reducers/itens'
 import { mudarCarrinho, mudarQuantidade } from '@/store/reducers/carrinho'
@@ -33,6 +34,8 @@ const Item = ({
     carrinho,
     quantidade = 0,
 }: ItemProps) => {
+    const [modoDeEdicao, setModoDeEdicao] = useState<boolean>(false)
+
     const dispatch = useDispatch()
 
     const estaNoCarrinho = useSelector((state: RootState) =>
@@ -46,6 +49,20 @@ const Item = ({
     const resolverCarrinho = () => {
         dispatch(mudarCarrinho(id))
     }
+
+    const componenteModoDeEdicao = modoDeEdicao ? (
+        <AiOutlineCheck
+            {...iconeProps}
+            className={styles['item-acao']}
+            onClick={() => setModoDeEdicao(false)}
+        />
+    ) : (
+        <AiFillEdit
+            {...iconeProps}
+            className={styles['item-acao']}
+            onClick={() => setModoDeEdicao(true)}
+        />
+    )
 
     return (
         <div
@@ -102,12 +119,15 @@ const Item = ({
                                 />
                             </div>
                         ) : (
-                            <FaCartPlus
-                                {...iconeProps}
-                                color={estaNoCarrinho ? '#1875E8' : iconeProps.color}
-                                className={styles['item-acao']}
-                                onClick={resolverCarrinho}
-                            />
+                            <>
+                                <FaCartPlus
+                                    {...iconeProps}
+                                    color={estaNoCarrinho ? '#1875E8' : iconeProps.color}
+                                    className={styles['item-acao']}
+                                    onClick={resolverCarrinho}
+                                />
+                                {componenteModoDeEdicao}
+                            </>
                         )}
                     </div>
                 </div>
