@@ -35,6 +35,7 @@ const Item = ({
     quantidade = 0,
 }: ItemProps) => {
     const [modoDeEdicao, setModoDeEdicao] = useState<boolean>(false)
+    const [novoTitulo, setNovoTitulo] = useState<string>(titulo)
 
     const dispatch = useDispatch()
 
@@ -75,7 +76,17 @@ const Item = ({
             </div>
             <div className={styles['item-descricao']}>
                 <div className={styles['item-titulo']}>
-                    <h2>{titulo}</h2>
+                    {modoDeEdicao ? (
+                        <input
+                            type="text"
+                            value={novoTitulo}
+                            onChange={evento =>
+                                setNovoTitulo(evento.target.value)
+                            }
+                        />
+                    ) : (
+                        <h2>{titulo}</h2>
+                    )}
                     <p>{descricao}</p>
                 </div>
                 <div className={styles['item-info']}>
