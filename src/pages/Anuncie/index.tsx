@@ -5,6 +5,7 @@ import { cadastrarItem } from '@/store/reducers/itens'
 import { RootState } from '@/store'
 import { DadosCadastroProduto } from '@/types/DadosCadastroProduto'
 import Header from '@/components/Header'
+import Input from '@/components/Input'
 import Button from '@/components/Button'
 import styles from './Anuncie.module.scss'
 
@@ -41,19 +42,19 @@ const Anuncie = () => {
                 className={styles.formulario}
                 onSubmit={handleSubmit(cadastrar)}
             >
-                <input
+                <Input
                     type="text"
                     placeholder="Nome do produto"
                     alt="nome do produto"
                     {...register('titulo', { required: true })}
                 />
-                <input
+                <Input
                     type="text"
                     placeholder="Descrição do produto"
                     alt="descrição do produto"
                     {...register('descricao', { required: true })}
                 />
-                <input
+                <Input
                     type="text"
                     placeholder="URL da imagem do produto"
                     alt="URL da imagem do produto"
@@ -72,7 +73,7 @@ const Anuncie = () => {
                         </option>
                     ))}
                 </select>
-                <input
+                <Input
                     type="number"
                     placeholder="Preço do produto"
                     {...register('preco', {
