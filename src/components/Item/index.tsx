@@ -2,11 +2,12 @@ import { useState } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { AiFillEdit, AiFillHeart, AiFillMinusCircle, AiFillPlusCircle, AiOutlineCheck, AiOutlineHeart } from 'react-icons/ai'
 import { FaCartPlus } from 'react-icons/fa'
-import { mudarFavorito } from '@/store/reducers/itens'
+import { mudarFavorito, mudarItem } from '@/store/reducers/itens'
 import { mudarCarrinho, mudarQuantidade } from '@/store/reducers/carrinho'
 import { RootState } from '@/store'
 import { Produto } from '@/types/Produto'
 import classNames from 'classnames'
+import Input from '@/components/Input'
 import styles from './Item.module.scss'
 
 const iconeProps = {
@@ -55,7 +56,13 @@ const Item = ({
         <AiOutlineCheck
             {...iconeProps}
             className={styles['item-acao']}
-            onClick={() => setModoDeEdicao(false)}
+            onClick={() => {
+                setModoDeEdicao(false)
+                dispatch(mudarItem({
+                    id,
+                    item: { titulo: novoTitulo }
+                }))
+            }}
         />
     ) : (
         <AiFillEdit
@@ -77,8 +84,7 @@ const Item = ({
             <div className={styles['item-descricao']}>
                 <div className={styles['item-titulo']}>
                     {modoDeEdicao ? (
-                        <input
-                            type="text"
+                        <Input
                             value={novoTitulo}
                             onChange={evento =>
                                 setNovoTitulo(evento.target.value)
