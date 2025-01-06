@@ -252,9 +252,12 @@ const itensSlice = createSlice({
 
             Object.assign(state[index], payload.item)
         },
+        deletarItem: (state, { payload }) => {
+            console.log(payload)
+        }
     },
 })
 
-export const { mudarFavorito, cadastrarItem, mudarItem } = itensSlice.actions
+export const { mudarFavorito, cadastrarItem, mudarItem, deletarItem } = itensSlice.actions
 
 export default itensSlice.reducer
